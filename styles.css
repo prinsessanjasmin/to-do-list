@@ -20,7 +20,7 @@ body {
     font-family: 'Times New Roman', Times, serif;
     font-weight: 600;
     font-size: 1rem;
-    background-color: rgb(252, 168, 14);
+    background-color: rgb(221, 216, 206);
     color: black;
 }
 
@@ -31,7 +31,7 @@ body {
     margin: auto;
     padding: 1rem;
     padding: auto;
-    border: 1px solid rgb(160, 158, 71);
+    border: 3px double rgb(160, 158, 71);
     border-radius: .2rem;
 }
 
@@ -77,17 +77,18 @@ h1 {
         color: rgb(247, 236, 90);
         font-size: 1.5rem;
         border: none;
+        cursor: pointer;
     }
 }
 
 .to-do-list {
     margin-top: 1rem;
-    order: class;
+    
 }
 
-li {
+.list-item {
     font-family: "Nanum Pen Script", cursive;
-    font-weight: 600;
+    font-weight: 700;
     font-style: normal;
     color: rgba(0, 0, 0, 0.822);
     font-size: 1.5rem;
@@ -95,37 +96,58 @@ li {
     position: relative;
     padding-left: 2rem; 
     padding-block: .5rem;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center; 
     border-bottom: 1px solid gray;
+}
 
-    .bin-icon {
+.checkbox {
+    appearance: none; 
+}
+
+.list-text {
+    text-align: left;
+}
+
+.checkbox::before {
+    content: "\f111"; 
+    font-family: "Font Awesome 5 Free";
+    font-weight: 500;
+    display: inline;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: #000; /* Change the color as needed */
+    cursor: pointer;
+}
+  
+.completed {
+    .list-text {
+        color: rgb(73, 73, 73);
+        font-weight: 400;
+        text-decoration: line-through 1px;
+    }
+
+    .checkbox::before {
+        font-weight: 900;
+    }
+}
+
+.bin-btn {
+    
+    cursor: pointer;
+
+    &::after {
+        content: "\f2ed"; 
+        font-family: "Font Awesome 5 Free";
+        font-weight: 500;
+        color: #000; /* Change the color as needed */
+        cursor: pointer;
         border: none;
         font-size: 1.5rem;
         background-color: transparent;
     }
-}
-  
-.to-do-mark::before {
-    content: "\f111"; /* Font Awesome circle unicode */
-    font-family: "Font Awesome 5 Free";
-    font-weight: 500; /* For solid icons */
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
-    color: #000; /* Change the color as needed */
-}
-
-.done-mark::before {
-    content: "\f058"; /* Font Awesome circle unicode */
-    font-family: "Font Awesome 5 Free";
-    font-weight: 600; /* For solid icons */
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
-    color: #000; /* Change the color as needed */
 }
