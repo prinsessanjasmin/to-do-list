@@ -1,5 +1,7 @@
 const inputForm = document.querySelector('.input-form'); 
 const binBtn = document.querySelector('.bin-icon');
+const tasks = [];
+let numberOfTasks = 0; 
 
 inputForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -10,6 +12,7 @@ inputForm.addEventListener('submit', e => {
     inputForm.reset();
 
     console.log(newTask);
+    console.log(tasks);
 })
 
 
@@ -18,15 +21,30 @@ function validateTask(task) {
         return false;
     }
     else {
+        numberOfTasks++;
+        addToArray(numberOfTasks, task);
         const newTask = createTask(task);
         addTask(newTask);
+        
         return true;
     }
+}
+
+function addToArray(number, task) {
+    todo = {
+        id: ('task'+number),
+        title: task,
+        completed: false
+    };
+
+    tasks.push(todo); 
+    return todo.id;
 }
 
 function createTask(task) {
     const li = document.createElement('li');
     li.classList.add('list-item');
+    li.setAttribute('id', 'task'+numberOfTasks);
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -50,12 +68,25 @@ function createTask(task) {
 
 function changeStatus() {
     const parent = this.parentElement; 
+    const taskId = parent.getAttribute('id');
     parent.classList.toggle('completed');
+
+    const taskIndex = tasks.findIndex(task => task.id === taskId);
+    if (taskIndex > -1) {
+        tasks[taskIndex].completed = !tasks[taskIndex].completed; // Toggle the completed status
+    }
 }
 
 function deleteTask(){
     const parent = this.parentElement;
     const grandparent = parent.parentElement;
+    const taskId = parent.getAttribute('id');
+
+    const taskIndex = tasks.findIndex(task => task.id === taskId);
+    if (taskIndex > -1) {
+        tasks.splice(taskIndex, 1); // Remove the task from the array
+    }
+
     grandparent.removeChild(parent);
 }
 
