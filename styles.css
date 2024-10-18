@@ -126,8 +126,8 @@ h1 {
   
 .completed {
     .list-text {
-        color: rgb(73, 73, 73);
-        font-weight: 400;
+        color: rgb(167, 167, 167);
+        font-weight: 200;
         text-decoration: line-through 1px;
     }
 
